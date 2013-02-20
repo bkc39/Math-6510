@@ -1,0 +1,364 @@
+\documentclass{article}
+\usepackage[tmargin=1in,bmargin=1in,lmargin=1.5in,rmargin=1.5in]{geometry}
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{ccfonts}
+\usepackage{relsize,fancyhdr,parskip}
+\usepackage{graphicx}
+
+\usepackage{tikz} \usetikzlibrary{shapes, shapes.geometric,
+  shapes.symbols, shapes.arrows, shapes.multipart, shapes.callouts,
+  shapes.misc,decorations.markings,decorations.shapes}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 6510 Problem Set 3}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 8pt
+
+\newcommand{\tab}{\hspace*{2em}}
+\newcommand{\tand}{\tab\text{and}\tab}
+
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\D}{\mathbb{D}}
+\DeclareMathOperator{\T}{\mathbb{T}}
+\DeclareMathOperator{\capchi}{\raisebox{2pt}{$\mathlarger{\mathlarger{\chi}}$}}
+
+%\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{:}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+\DeclareMathOperator{\lap}{\bigtriangleup}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+\newcommand{\exercise}[1]{\noindent{\textbf{Exercise #1:}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\diam}[1]{\text{diam}(#1)}
+\newcommand{\seq}[2]{\{#1_{#2}\}_{#2 = 1}^\infty}
+
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\cis}[1]{\operatorname{cis}#1}
+\newcommand{\res}{\operatorname{res}}
+
+
+\newcommand{\real}{\mathrel{\text{Re}}}
+\newcommand{\imag}{\mathrel{\text{Im}}}
+\newtheorem*{thm}{\\ Theorem}
+\newtheorem*{lem}{\\ Lemma}
+\newtheorem*{claim}{\\ Claim}
+\newtheorem*{defn}{\\ Definition}
+\newtheorem*{prop}{\\ Proposition}
+
+\begin{document}
+\exercise{1.2.2}
+
+Suppose that $X \subset \R^n$ is the union of convex open sets,
+$X_1,\ldots,X_n$ such that $X_i \cap X_j\cap X_k \neq \emptyset$ for
+every $i,j,k$. We will first establish that $X$ is path-connected. To
+see this, we use the hypothesis that $X_i \cap X_j\cap X_k \neq
+\emptyset$ and note that this implies that the pairwise intersections
+$X_i\cap X_j \neq \emptyset$ because otherwise we would have $X_i \cap
+X_j\cap X_k \subset \emptyset$, but the former is non-empty so this is
+impossible. With this fact in hand, we choose any two points $x,y$ in
+$X$ and note that if $x \in X_i$ and $y \in X_j$ then there is a point
+$z$ in $X_i \cap X_j$ so we can draw the line between $x$ and $z$ and
+then from $z$ to $y$, both of which are contained in $X$ because each
+of the $X_j$ is convex. Hence, $X$ is path-connected.
+
+Now we need to compute the fundamental group of $X$. First we note
+that the intersection of two convex sets must be convex because any
+two points $x,y$ in the intersection $X_i \cap X_j$ is in $X_i$ and
+$X_j$ and hence the line joining them is also in $X_i\cap X_j$ by
+convexity. We can then note that because convex sets deformation
+retract to a point via the nullhomotopy, their fundamental groups are
+trivial. We then apply the Van-Kampen theorem to see that $\pi_1(X)
+\cong \mathlarger{\ast}_{i,j,k} \pi_1(X_i \cap X_j \cap X_k) = \ast 0
+= 0$. So the fundamental group of $X$ is trivial and $X$ is simply
+connected.
+
+\exercise{1.2.3}
+
+As a base case, we refer to the fact that $\R^n - \{x\} \cong S^{n-1}
+\times \R$ (c.f. pg 35) and note that $\pi_1(\R^n - \{x\}) \cong
+\pi_1(S^{n-1}) \times \pi_1(\R)$. We then use the fact that $S^n$ is
+simply connected for $n \geq 2$ so that $\pi_1(\R - \{x\}) = 0$ when
+$n \geq 3$. We then proceed by induction on the number of removed
+points to prove the result. Indeed we note that
+\[
+\R^n - \{x_1, \ldots, x_n\} \cong (\R^n - \{x_1,\ldots,x_{n-1}\})
+\times (\R^n - \{x_n\})/\{x_1,\ldots,x_n\}^c
+\]
+This quotient identifies all points that are not one of the
+$x_i$. Geometrically, it is a superposition of the two versions of
+$\R^n$, one with $n-1$ points removed, and the other with 1 point
+removed. Then we note that by the induction hypothesis $\pi_1(\R^n -
+\{x_1,\ldots,x_{n-1}\} = 0$ and $\pi_1(\R^n - \{x_n\}) = 0$ as seen in
+the base case. Consequently, the inclusion map $\R^n -
+\{x_1,\ldots,x_n\} \into (\R^n - \{x_1,\ldots,x_{n-1}\}) \times (\R^n
+- \{x_n\})$ induces an injective homomorphism from $\pi_1(\R^n -
+\{x_1,\ldots,x_n\} \to 0$. This implies that $\pi_1(\R^n -
+\{x_1,\ldots,x_n\} = 0$ as desired.
+
+\exercise{1.2.4}
+
+Now we consider the space $X$ which is $\bigcup_{j=1}^n
+\mathcal{L}_j$, where $\mathcal{L}_j$ is a line through the
+origin. First we note that $\R^3 - X$ deformation retracts onto $S^{2}
+- \{\ell_1,\ldots,\ell_{2n}$, where each of the $\ell_j$ is one of the
+points where the line $\mathcal{L}_j$ intersects $S^2$, via the
+straight line homotopy (note that the origin is deleted so we retain
+continuity). Then we note that $S^2 - \{x\} \cong \R^2$ via
+stereographic projection, and this induces a map from $S^2 -
+\{\ell_1,\ldots,\ell_{2n-1}\} \into \R^2$. We then note that $\R^2 -
+\{\ell_1,\ldots,\ell_{2n-1}\}$ deformation retracts onto the loops
+around each of the deleted points, which is $\bigvee_{i=1}^{2n-1}
+C_i$. This gives a string of isomorphisms
+\[
+\pi_1(\R^3 - X) \cong \pi_1(S^2 - \{\ell_1,\ldots,\ell_{2n}\}) \cong
+\pi_1(\R^2 - \{\ell_1,\ldots,\ell_{2n-1}\}) \cong
+\pi_1(\bigvee_{i=1}^{2n-1} C_i) \cong \ast_{i=1}^{2n-1} \Z
+\]
+
+\exercise{1.2.7}
+
+Let $X$ be the space $S^2/(n \sim s)$ where $n,s$ are the north and
+sout poles, respectively. Following the hint, we will create a
+cell-structure for $X$. We begin with 0-cells that are simply the
+points $n,s$. We then attach a 1-cell as a path connecting $n$ to
+$s$. Finally, we add a 2-cell along the path between $n$ and $s$ as
+well as its inverse path. Passing to the quotient space we are left
+with a cell structure for $X$ that has the generating loop as the path
+from $n$ to $s$, which are now identified. Also, the two cell is
+attached along the path and its inverse, so the presentation for the
+group is
+\[
+\pi_1(X) \cong \langle a \mid aa^{-1} = 1\rangle \cong \Z
+\]
+So the fundamental group of $X$ is $\Z$.
+
+\exercise{1.2.8}
+
+We begin with two separate tori $X = (S^1 \times S^1) \times (S^1 \times
+S^1)$. Let $a,b$ and $c,d$ be the generators for their respective
+fundamental groups. Because
+\[
+\pi_1(X) \cong \pi_1(S^1 \times S^1) \times \pi_1(S^1 \times S^1)
+\]
+we conclude that $a$ and $b$ must both commute with $c$ and $d$,
+respectively. Then, under the identification $S^1\times \{x_0\} \sim
+S^1 \times \{x_1\}$ where each is a subspace of the distinct factors
+of $X$, we note that this corresponds to identifying one of the
+generators. Without loss of generality, suppose that we identify
+$b,c$. Let $Y$ denote this quotient space, then have a presentation
+for the group
+\[
+\pi_1(Y) = \langle a,b,d \mid ad = da\rangle
+\]
+
+\exercise{1.2.9}
+
+First we want to show that $M_h'$ does not retract onto its boundary
+circle, $C$, and that consequently $M_g$ does not deformation retract
+onto $C$. Suppose to the contrary that there were such a retraction
+$r: M_h' \to C$ and let $i: C \into M_h'$ be the inclusion
+map. Because $r$ is a retraction the induced homomorphism $i_*:
+\pi_1(C) \into \pi_1(M_h')$ is injective. Consider the abelianizations
+of $\pi_1(C)$ and $\pi_1(M_h')$ and the map
+\[
+i_*^{ab}: \pi_1(C) \into \pi_1^{ab}(M_h')
+\]
+This map is well defined because the homomorphism must send the
+commutator subgroup into the commutator subgroup. Also, because
+$\pi_1(C) \cong \Z$ is already abelian, taking the abelianization does
+not change it. Consider the identification of $M_h'$ with a regular
+$4g$-gon in the usual way (c.f. pg 5). Then if we delete a point in
+the center of the polygon the loop around the boundary, which consists
+only of commutators, will be abelianized away. Thus, $i_*^{ab}$ is the
+trivial map, which is impossible. Thus, there could be no such
+retraction.
+
+Now we need to show that $M_g$ does retract onto the non-separating
+circle $C'$. We see that $C'$ can be identified with one of the
+generators of $\pi_1(M_g)$, say $c$. If we identity $M_g$ with its
+$4g$-gon, then we can see that the polygon is homeomorphic to a
+rectangle with sides $a,b,a^{-1},[M_g,M_g]cb^{-1}$, where $a,b$ are
+generators for $\pi_1(M_g)$ and $[M_g,M_g]$ is the commutator subgroup
+of $\pi_1(M_g)$. The retract on this rectangle is the canonical
+projection onto the sides labeled $a$.
+
+\exercise{1.2.10}
+
+Consider the complement of the loops $\alpha \cup \beta$ as seen in
+the figure on pg 53, denote this space by $X$.. We note that the
+ambient space $D^2 \times I$ has the boundary disks $S^1 \times \{0\}$
+and $S^1\times\{1\}$ as contractible subspaces. We apply the
+contraction and note that the image of $\alpha$ and $\beta$ is two
+interlocked loops rooted at the points that we contracted onto at the
+boundary. Then we note that the resulting figure, which is the union
+of two cones, is homotopy equivalent to $S^2$ with interlocking
+loops. It is shown in example 1.23 (c.f. pg 46) that the fundamental
+group of the resulting space $Y$ is $\pi_1(Y) \cong \Z \times
+\Z$. Thus, the retractions would induce injective homomorphisms into
+$\pi_1(Y) \cong \Z \times \Z \into \pi_1(X)$. But because $\gamma$ is
+a non-trivial loop in $Y$, it cannot be sent to a trivial loop in
+$X$. So $\gamma$ is not nullhomotopic in $X$.
+
+\exercise{1.2.17}
+
+Let $X = \R^2 - \Q^2$. We will first show that $X$ is path-connected,
+and so the computation of $\pi_1(X)$ is independent of the choice of
+basepoint. Consider $(x,y),(z,w) \in X$. By construction we know that
+one of $x$ and $y$ is irrational, and likewise for $z$ and $w$. We
+proceed by case analysis. Suppose that both $x$ and $w$ are irrational
+then the line $t(x,y) + (1-t)(x,w)$ is a traverses from $(x,y) \to
+(x,w)$. Then we traverse the line $t(x,w) + (1-t)(z,w)$ is a valid
+path. If we see that $z$ is irrational, then we can find some point
+$(z,w')$ with $w'$ irrational and traverse this line. We are then in
+the previous case, and construct the path as we did there. The case
+that $y$ is irrational is analogous, and so $X$ is path connected.
+
+Let $p$ be some irrational number and for each irrational $\xi$
+consider the strips $([-\xi,\xi] \times \{p\}), ([-\xi,\xi] \times
+\{-p\}), (\{p\} \times [-\xi,\xi]), (\{-p\} \times [-\xi,\xi])$. None
+of these lines contain any rational points, so they form a square in
+$X$. We then consider the basepoint $(0,p)$ and consider the loops
+that traverse each of the ``squares'' above in the usual
+orientation. We need to show that for distinct $\xi$, the loops are
+not homotopic. Let $S_{\xi_1},S_{\xi_2}$ be distinct squares above and
+consider the path which first traverses around $S_{\xi_1}$ and then
+$S_{\xi_2}$ in the reverse direction. We need to show that this is not
+the constant loop.
+
+Because $\Q$ is dense in $\R$ we know that there is a rational $r$
+between $\xi_1$ and $\xi_2$ so the inclusion map $\R^2 - \Q^2 \into
+R^2 - (0,p)$, which induces a homomorphism $\pi_1(\R^2 - \Q^2) \to
+\pi_1(R^2 - (0,p))$. The plane with a point removed is homotopic to
+$S^1$ via the straight line homotopy, but the image of the loop
+$S_{\xi_1}S_{\xi_2}^{-1}$ is a non-trivial loop in $S^1$. Hence,
+$S_{\xi_1}S_{\xi_2}^{-1}$ cannot be nullhomotopic in $\R^2-\Q^2$
+because otherwise it would be sent to the trivial element under the
+homomorphism, which we have just seen is not the case. As a result,
+there is a homotopy class in $\pi_1(\R^2-\Q^2)$ for each irrational,
+and therefore $\pi_1(\R^2-\Q^2)$ is uncountable.
+
+\exercise{A1} Let $D$ denote the disk, $A$ denote the annulus and $M$
+denote the M\"{o}bius band.
+\begin{enumerate}
+\item[\textbf{(a)}] First consider the case of the disk. We have seen
+  that if the point removed from the disk is not on the boundary, then
+  $\pi_1(X) = \Z \ast \Z \not\cong 0 = \pi_1(D)$.
+
+  In the case of the annulus, we note that if the point removed is not
+  on the boundary then the annulus deformation retracts onto the two
+  generating loops, one about each hole. Hence, there is an
+  isomorphism $\pi_1(A - \{x\}) \cong \Z \ast \Z$. Also, we see that
+  $A$ retracts onto the circle so that $\pi_1(A) \cong \Z$. However,
+  the induced homomorphism would be injective from $\Z \ast \Z \into
+  \Z$, which is impossible. However, if the deleted point is on the
+  boundary then the resulting space still deformation retracts onto
+  the inner circle and so the induced homomorphism is an isomorphism
+  $\Z \to \Z$.
+
+  Now consider the M\"{o}bius band. If we delete a point that is not
+  on the boundary, then $M$ deformation retracts onto a figure-8 and
+  so there should be an induced homomorphism $\pi_1(M - \{x\}) = \Z
+  \ast \Z \to \Z = \pi_1(M)$, which is impossible. However, if the
+  deleted point is on the boundary, then $M$ deformation retracts onto
+  the remaining boundary circle and so has $\pi_1(M - \{b\}) \cong
+  \Z$, so the induced homomorphism is an isomorphism.
+\item[\textbf{(b)}] Let $f: X \to Y$ be a homeomorphism, where $X$ and
+  $Y$ are either both disks, annuli, or M\"{o}bius bands. Suppose that
+  $f$ does not restrict to a homeomorphism on the boundary so that
+  $f_R = f\mid_{\partial X}$ is not a homeomorphism. Consider the
+  spaces $X - \{x\}$ and $Y - \{f(x)\}$. We then apply the previous
+  part to the induced isomorphism $\pi_1(X - \{x\}) \cong \pi_1(Y -
+  \{f(x)\})$ such that $x \in \partial X$ and $f(x) \not\in \partial
+  Y$ to reach a contradiction. These groups are only isomorphic if
+  both points are contained in the boundary. Thus $f$ must restrict to
+  a homeomorpshism on the boundary.
+\item[\textbf{(c)}] Finally, to see that $M \not\cong A$ we suppose to
+  the contrary that there were a homeomorphism $f: X to Y$. By the
+  previous part, $f$ would have to restrict to a homeomorphism on the
+  boundary. However, this is impossible because if $X$ is a M\"{o}bius
+  band and $Y$ is an annulus then $Y$ deformation retracts onto its
+  boundary circles. However, this implies that $f^1\circ r$ is a
+  deformation retract of $M$. However, we showed in last week's
+  assignment that $M$ does not deformation retract onto it's boundary
+  circle. Thus, we have a contradiction and so $M \not\cong A$.
+\end{enumerate}
+
+\exercise{A2}
+
+Suppose that $X\subset \R^n$ is an open, path-connected set and set $Y
+= X - \{p\}$ Let $Z$ be a ball about the deleted point $p$ that is
+contained in $X$. We can find such a neighborhood because $x$ is
+assumed open. Observe that $X = Y \cup Z$ and note that the
+intersection $Y \cap Z$ is just $Z$, a ball centered at $p$ with the
+center deleted. We know that when $n \geq 3$ $Z$ is homeomorphic to
+$\R^{n-1}$, which is path-connected. Hence, the intersection $Y \cap Z
+\cong Z$ is path-connected and we can apply the van Kampen theorem to
+see that the map $\pi_1(Y) \ast \pi_1(Z) \to \pi_1(X)$ is
+surjective. However, the ball $Z$ is contractible so $\pi_1(Z) = 0$
+and so in fact have that $\pi_1(Y) \to \pi_1(X)$ is surjective. We
+then recall that the inclusion map also induces an injective
+homomorphism $\pi_1(Y) \to \pi_1(X)$ and so the homomorphism is in
+fact an isomorphism.
+
+\exercise{A3}
+
+Let $X \subset \R^n$ be open and path-connected. Following the hint,
+we first show that any path in $X$ with rational endpoints is
+homotopic to a path consisting of a finite number of line segments
+with rational endpoints. Indeed, let $\gamma$ be a path in $X$ with
+endpoints $p$ and $q$, which have rational endpoints. Cover each point
+in $\gamma$ with a ball contained in $X$, which is always possible
+because $X$ is open. Because $\gamma$ is the continuous image of the
+unit interval, it is comapct, and so only finitely many of these balls
+are needed to cover $\gamma$.
+
+Let $B_1,B_2,\ldots, B_n$ be finite subcover and without loss of
+generality let $p \in B_1$ and $q \in B_n$. Arrange a sequence
+$B_1'B_2'B_3'\cdots B_m'$ where each $B_j'$ is one of the $B_i$ such
+that $B_{j-1}' \cap B_j \neq 0$, $B_1' = B_1$ and $B_m' = B_n$ (This
+sequence may contain duplicates, but will be finite). Because balls
+are convex, we can construct a path from $p$ to $q$ by connecting $p$
+to a rational point in the intersection $B_1' \cap B_2'$ which is
+possible because the intersection is open and the rationals are
+dense. This gives us a finite path from $p$ to $q$ consisting only of
+line segements with rational endpoints.
+
+To see the homotopy between $\gamma$ and our piecewise linear path we
+proceed by induction on the number of balls in the subcover. If there
+were only one ball, then the ball is convex so the straight line
+homotopy will suffice. For the inductive step, suppose that we have a
+homotopy that we have $n$ balls that cover $\gamma$. We know that
+there is a homotopy for the first $n-1$ of them by the inductive
+hypothesis, and we need only connect them through the intersection of
+$B_{n-1}$ and $B_n$. Because the sets are convex, a piecewise homotopy
+also works to connect the final two balls. (This is a shortened
+version of a previous exercise).
+
+With the hint shown, we note that any path with irrational endpoints
+is homotopic to a path with rational endpoints because any ball about
+the endpoints will contain a rational point by density. Because the
+ball is path connected, the translation from the irrational point to
+the rational one does not change homotopy classes. Thus, each path in
+$X$ is homotopic to a path indexed by $\bigcup_{n=1}^\infty (\Q^n
+\times \Q^n)$ which is the union over all finite length paths of all
+rational endpoint line segments. This is the countable union of
+countable sets. Hence there is an injection $\pi_1(X) \into \Z$ so
+$\pi_1(X)$ is countable.
+
+\end{document}

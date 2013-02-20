@@ -1,0 +1,362 @@
+\documentclass{article}
+\usepackage[tmargin=1in,bmargin=1in,lmargin=1.5in,rmargin=1.5in]{geometry}
+\usepackage{amsfonts,amsmath,amssymb,amsthm}
+\usepackage{mathabx}
+%\usepackage{MnSymbol}
+\usepackage{mathrsfs}
+\usepackage{ccfonts}
+\usepackage{relsize,fancyhdr,parskip}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,shapes,decorations.pathreplacing}
+
+\pagestyle{fancy}
+\lhead{Ben Carriel}
+\chead{Math 6510 Problem Set 1}
+\rhead{\today}
+
+\parskip 7.2pt
+\parindent 7.2pt
+
+\newcommand{\tab}{\hspace*{2em}}
+\newcommand{\tand}{\tab\text{and}\tab}
+
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\D}{\mathbb{D}}
+\DeclareMathOperator{\capchi}{\raisebox{2pt}{$\mathlarger{\mathlarger{\chi}}$}}
+
+%\DeclareMathOperator{\divides}{\mathrel{|}}
+\DeclareMathOperator{\suchthat}{\mathrel{:}}
+
+\DeclareMathOperator{\lra}{\longrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\bijection}{\leftrightarrow}
+\DeclareMathOperator{\lap}{\bigtriangleup}
+
+\newcommand{\problem}[1]{\noindent{\textbf{Problem #1}}\\}
+\newcommand{\problempart}[1]{\noindent{\textbf{(#1)}}}
+\newcommand{\exercise}[1]{\noindent{\textbf{Exercise #1:}}}
+
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\diam}[1]{\text{diam}(#1)}
+\newcommand{\seq}[2]{\{#1_{#2}\}_{#2 = 1}^\infty}
+
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\cis}[1]{\operatorname{cis}#1}
+
+\newtheorem*{thm}{\\ Theorem}
+\newtheorem*{lem}{\\ Lemma}
+\newtheorem*{claim}{\\ Claim}
+\newtheorem*{defn}{\\ Definition}
+\newtheorem*{prop}{\\ Proposition}
+
+
+\begin{document}
+
+\exercise{1.1.2}
+
+Consider the change-of-basepoint homomorphism $\beta_h: f \mapsto
+[h\cdot f\cdot \bar{h}]$. Suppose that $h' \simeq h$. We need to show
+that for any $f$, $\beta_h(f) \simeq \beta_{h'}(f)$. Indeed, we can
+find a homotopy of paths $H(s,t) = g_t(s)$ from $\beta_h(f)$ to
+$\beta_{h'}(f)$ and define a new family of paths $\beta H(s,t) = g_t
+\cdot f \cdot \bar{g_t}$. We need to show that $\beta H$ is a homotopy
+between $\beta_h(f)$ and $\beta_{h'}(f)$. It is clear from the
+construction that $\beta H(s,0) = \beta_h(f)$ and $\beta H(s,1) =
+\beta_{h'}(f)$. Moreover, continuity of $\beta H$ follows from the
+continuity of $H$.
+
+\exercise{1.1.3}
+
+Let $X$ be path-connected and abelian. Then for any basepoint-change
+homomorphisms $\beta_f: \pi_1(X,x_1) \to \pi_1(X,x_0)$ and $\beta_k$
+do not depend on the endpoints. If we choose maps $g,h$ so that
+$[h\cdot \bar{g}] \in \pi_1(X,x_0)$ then for any path $[f]$ we have
+\[
+\beta_f([h\cdot \bar{g}]) = [\bar{f} \cdot h \cdot \bar{g}\cdot f] =
+[\bar{g}\cdot f \cdot \bar{f} \cdot h] = [\bar{g}\cdot h]
+\]
+Then for any path $k$ from $x_0$ to $x_1$ we get
+\[ [\bar{g}\cdot h] = [\bar{g}\cdot k\cdot \bar{k}\cdot h] =
+[\bar{k}\cdot h \cdot \bar{g} \cdot k] = \beta_{\bar{k}}([h\cdot \bar{g}])
+\]
+So $\beta_f = \beta_k$ as desired.
+
+Conversely, suppose that every basepoint-change homomorphism depends
+only on the endpoints of $h$. Then for any two paths $h,j$ with the
+same basepoint. Then decompose $f$ into components $h_1 = h([0,1/2])$
+and $h_1 = h([1/2,1])$. So by assumption we have
+\begin{align*}
+  \beta_{h_1}(j) &= \beta_{h_2}(j) \\
+  [h_1^{-1}\cdot j\cdot h_1] &= [h_2\cdot j\cdot h_2^{-1}]
+\end{align*}
+We then multiply by $h_1$ on the left and $[h_2]$ on the right to get
+\begin{align*}
+  [h_1]\cdot[h_1^{-1}\cdot j\cdot h_1]\cdot [h_2] &= [h_1]\cdot
+  [h_2\cdot j\cdot h_2^{-1}]\cdot [h_2] \\
+  [j\cdot h_1\cdot h_2] &= [h_1\cdot h_2\cdot j] \\
+  [j] \cdot [h] &= [h]\cdot [j]
+\end{align*}
+So $\pi_1(X)$ is abelian.
+
+\exercise{1.1.4}
+
+Let $X \subset \R^n$ be locally star-shaped and let $\gamma: I \to X$
+be a path in $X$. To each point $\gamma(t)$ we can find a star-shaped
+set $S_t$ containing $\gamma(t)$ and so $\gamma(I) \subset
+\bigcup_{t\in I} S_t$. Because $\gamma(I)$ is the continuous image of
+a compact set, it is also compact and we can find a finite subcover
+$S_{t_0}, S_{t_2}, \ldots, S_{t_n}$. Moreover, we have that $S_{t_i}
+\cap \bigcup_{i\neq j}S_{t_{j}} \neq \emptyset$ because then the
+$S_{t_i}$ would not cover $\gamma(I)$. We now construct a piecewise
+linear path from $x_0 = \gamma(0)$ to $x_1 = \gamma(1)$. Begin at $x_0
+\in S_{t_0}$. Because $S_{t_0}$ is star-shaped there is a point
+$c_0\in S_{t_0}$ such that the line segment between $x_0$ and $c_0$ is
+contained in $S_{t_0}$. Now choose the smallest $i$ such that $S_{t_0}
+\cap S_{t_i} \neq \emptyset$. Choose a point $x_i$ in the intersection
+and a point $c_i$ such that the line segment joining $x_i$ and $c_i$
+is wholly contained in $S_{t_i}$.
+
+Iterate this process until all of the $S_{t_i}$ have been
+exhausted. At this point there are two cases: either $\gamma(1) \in
+S_{t_n}$ and we add the segments $x_{n}$ to $c_n$ and $c_n$ to
+$\gamma(1)$ and we are done, or $\gamma(1) \not\in S_{t_n-1}$. In this
+case we have to do some backtracking. We retrace the path until we
+reach the star that contains $\gamma(1)$ and then do the same steps as
+in the previous case. So in the end we have a piecewise linear path
+from $\gamma(0)$ to $\gamma(1)$.
+
+Now we need to verify that the piecewise linear path is homotopic to
+$\gamma(I)$. Consider the restriction of $\gamma$ to $S_{t_i}$. Now we
+need to construct the valid homotopy. We will construct the homotopy
+piecewise by looking at its behavior on an individual domain. There
+are two cases: Either $S_{t_i}$ two segments within it, or it has
+three due to the``backward'' segements out of the center.
+
+In the former case suppose that $S_{t_i}$ and $S_{t_j}$ intersect and
+the linear path goes through the intersection. Now find the smallest
+$t$ such that $\gamma(t) \in S_{t_i}\cap S_{t_j}$ and the smallest $t$
+such that $\gamma(t) \in S_{t_j} - S_{t_i}$; call them $t_i,t_j$
+respectively. Then we construct the homotopy of paths by first
+composing the straight line homotopy to the center point $c_i$ for
+each $\gamma(t)$ with $t \leq t_i$ and then send each point
+$\gamma(t)$ from $c_i$ to $(1-t)x_i + tc_i$. Do the same for $t \geq
+t_j$. For the points of $\gamma$ in the intersection we define a path
+$p_i$ from $H_s(t_i)$ to $H_s(t_j)$ (the locations of $\gamma(t_i)$
+and $\gamma(t_j)$ at time $s$ in the homotopy) that is contained in
+the stars. For each $t$ in $[t_i,t_j]$ we send $\gamma(t)$ to
+$p(1/(t_j-t_i)$. Becuase this path is continuous and agrees with $H_t$
+on the boundaries, the concatenation of this path with $H_{t_i}$ and
+$H_{t_j}$ is also continuous. So this is a valid homotopy on these
+stars.
+
+In the second case we have that there is a ``backward'' line in
+$S_{t_i}$. This modifies the construction only slightly. Instead of
+sending all of the $\gamma(t)$ to a single segment, we must divide
+them in half and send half of the $\gamma(t)$ to one segment, and the
+other half to the other segment. The fact that this is continuous
+follows from the fact that both $\gamma$ and the linear path are
+continuous at $c_0$ which is the boundary point for this
+operation. Other than this, the construction is identical.
+
+Hence, every path in $X$ is homotopic to a piecewise linear path in $X$.
+
+\exercise{1.1.5}
+
+We need to show that the following are equivalent:
+\begin{enumerate}
+\item[\textbf(a)] Every map $S^1 \to X$ is homotopic to the constant
+  map, with image a point.
+\item[\textbf(b)] Every map $S^1 \to X$ extends to a map $D^2 \to X$.
+\item[\textbf(c)] $\pi_1(X,x_0) = 0$ for all $x_0 \in X$.
+\end{enumerate}
+
+We begin by showing that \textbf{(a)} $\Rightarrow$
+\textbf{(b)}. Indeed, suppose that every map $f: S^1 \to X$ is
+homotopic to the constant map. Then there is a homotopy $H(t,s)$
+connecting $f$ to $1$. Now we consider the function
+\begin{align*}
+  F: D^2 &\to X \\
+  (r,\theta) &\mapsto H(r, \theta/2\pi)
+\end{align*}
+To see that $F$ is continuous note that $F = g \circ H$ where $g$
+divides the second coordinate by $2\pi$. $g$ is linear and hence
+continuous so $F$ is the composition of two continuous functions and
+is continuous as well. Moreover, $F|_{S^1} = f$ by the definition of a
+homotopy.
+
+For $\textbf{(b)}\Rightarrow \textbf{(c)}$ we simply do the reverse
+process of the above. Suppose that every map $f: S^1 \to X$ extends to
+a map $F:D^2 \to X$. We can create a homotopy as follows: Let
+$H_f(0,s) = x_0$ for $x_0 = F(0,0)$ and $H_f(1,s) = f(s)$ and then
+$H_f(t,s) = F(t, 2\pi\theta)$. The continuity of $H_f$ follows
+immediately from the continuity of $F$. Now consider any two loops,
+$f$ and $g$ in $X$. We can create a homotopy between them by setting
+\[
+C(t,s) =
+\begin{cases}
+  H_f(1-2t,s) & t \leq 1/2 \\
+  H_g(2t-1,s) & t > 1/2
+\end{cases}
+\]
+The continuity is immediate by observing that $C(1/2, s) = x_0$. Thus,
+there is only one element in $\pi_1(X,x_0)$ for every $x_0$ in $X$.
+
+Finally, we need to show that $\textbf{(c)} \Rightarrow
+\textbf{(a)}$. Consider a loop $\varphi: I \to X$. We can identify
+each loop with a map $\phi: S^1 \to X$ by composing with the quotient
+map $p: I \to S^1$ that identifies $p(0) = p(1)$. This implies that
+the space of loops in $X$ is the set of homotopy classes of maps $S^1
+\to X$. Because $\pi_1(X,x_0) = 0$ we see that the space of maps $S^1
+\to X$ must contain only one homotopy class and is therefore homotopic
+to the constant map.
+
+\exercise{1.1.6}
+
+Consider the set $[S^1,X]$ of homotopy classes of maps $S^1 \to X$. We
+can define the map $\Phi: \pi_1(X,x_0) \to [S^1,X]$ by $[f,x_0] \to
+[f]$, so we ignore the basepoints. We must show the following
+\begin{enumerate}
+\item[\textbf{(a)}] If $X$ is path-connected then $\Phi$ is surjective.
+\item[\textbf{(b)}] If $X$ is path-connected then $\Phi([f]) =
+  \Phi([f])$ if and only if $[f]$ and $[g]$ are conjugate in
+  $\pi_1(X,x_0)$.
+\end{enumerate}
+To see that $\Phi$ is surjective suppose that we have a path $[f] \in
+[S^1,X]$. Then for each $\theta \in [0,1\pi)$ we have a path
+$g_\theta$ between $f(\theta)$ and $x_0$ because $X$ is
+path-connected, and $g_\theta\cdot f\cdot \bar{g}_{\theta'}$ is a loop based
+at $x_0$. Moreover, $\Phi(g_{\theta}\cdot f\cdot \bar{g}_{\theta'}) = [f]$. So
+we need to take sure that this map is independent of the choice of
+representative for $[f]$. Suppose that $f,\tilde{f} \in [f]$ and that
+$F(t,s)$ is a homotopy connecting them. Then let $H(t,s) = g_t$ be the
+homotopy defined by the $g_\theta$ above, so that $H_t \cdot F_t \cdot
+\bar{H}_t$ (product taken in $\pi_1(X,x_0)$ is always a loop at
+$x_0$. This means that $\Phi(f)$ is homotopic to $\Phi(\tilde{f})$ and
+so $\Phi$ is well-defined on $[S^1,X]$ and we are done.
+
+For $\textbf{(b)}$ we begin with $\Rightarrow$. Suppose that
+$\Phi([f]) = Phi([g])$. So $f$ is homotopic to $g$ by a homotopy $H$,
+when looked at as paths. We need to verify that this is indeed a
+homotopy of loops. Suppose that $x_0 = f(\theta) = g(\theta')$ and let
+$h$ be a path between $x_0$ and $f(\theta')$. Then $h\cdot f\cdot
+\bar{h}$ is a loop at $x_0$ that is loop homotopic to $g$.
+
+Conversely, for $\Leftarrow$ we suppose that there is an $[h] \in
+\pi_1(X,x_0)$ such that $[h]\cdot [f]\cdot [\bar{h}] = [g]$. We need
+to show that $f$ is homotopic to $g$ as maps in $[S^1,X]$. We note
+that the loop $h$ is homotopic as a map to the constant map via the
+homotopy $H: I\times I \to X$ given by $H(t,s) = h(ts)$. So then $[h]
+\cdot[f]\cdot [\bar{h}]$ is homotopic as a map to $[f]$ via the
+homotopy $H \cdot f \cdot \bar{H}$. So $\Phi([f]) = \Phi([g])$.
+
+\exercise{1.1.10}
+
+Let $f$ be a loop in $X$ based at $x_0$ and $g$ be a loop in $y$ based
+at $y_0$. Consider the concatenation of $f$ and $g$ in $X\times Y$
+given by $h = [f \times \{y_0\}]\cdot [\{x_0\} \times g]$ traversed as
+$f$ first, followed by $g$. Let $h'$ be the loops traversed in the
+reverse order. Consider the new family of loops $\varphi_t: [-1,2] \to
+X\times Y$ given by
+\[
+\varphi_t(s) =
+\begin{cases}
+  (x_0, g(t(s-1))) & s \in [-1,0] \\
+  (f(s), g(t)) & s\in [0,1] \\
+  (x_0, g((1-t)(s-2)+1)) & s\in [1,2]
+\end{cases}
+\]
+Geometrically, $\varphi_t$ follows $g$ from $(x_0,y_0)$ to $(x_0,
+g(t))$, then traverses the loop $(f, g(t))$ in $X \times \{g(t)\}$ and
+then follows the remainder of $g$ from $(x_0,g(t))$ back to
+$(x_0,y_0)$.
+
+To see that $\varphi_t$ is a homotopy between $h$ and $h'$ we observe
+from the definition that $\varphi_0 = h$ and $\varphi_1 =
+g$. Moreover, the continuity of the homotopy follows from the
+continuity of $f$ and $g$ as well as the fact that the pieces defining
+$\gamma_t$ agree on the endpoints of the intervals. Hence, $\gamma_t$
+is a valid homotopy.
+
+\exercise{1.1.13}
+
+We begin with $\Rightarrow$. Suppose that the natural inclusion
+$\pi_1(A,x_0) \hookrightarrow \pi_1(X,x_0)$ is surjective. Let $f: I
+\to X$ be a path in $X$ with endpoints in $A$. Then because $A$ is
+path-connected we can find a path in $A$ that connects $f(0)$ to $x_0$
+and likewise for $f(1)$; denote these paths by $p_0$ and $p_1$,
+respectively. Then $f$ is homotopic to a loop in $\pi_1(X,x_0)$ given
+by $p_0 \cdot f \cdot p_1$ via the homotopy concatenating
+$(p_0)_t\cdot f\cdot (p_1)_{1-t}$ where $(p_i)_t$ is the restriction
+of $p_i$ to the interval $[t,1]$. Because the inclusion map is surjective we
+can find a loop in $f_A\in \pi_1(A,x_0)$ that is homotopic to $f$. Now
+we create a path in $A$ homotopic to $f$ by considering $p_0\cdot f_A
+\cdot p_1$, which is wholly contained in $A$.
+
+$\Leftarrow$ is more straightforward. If every path in $X$ with
+endpoints in $A$ is homotopic to a path in $A$, then in particular
+every loop in $X$ with endpoints in $A$ is homotopic to a loop in
+$A$. This is exactly what it means for the inclusion map to be
+surjective.
+
+\exercise{4.1.1}
+
+Let $+'$ denote addition of maps in the $k^{\text{th}}$ coordinate
+defined by
+\[
+(f+'g)(x_1,\ldots,x_n) =
+\begin{cases}
+  f(x_1,\ldots,2x_k,\ldots,x_n) & x \leq 1/2 \\
+  g(x_1,\ldots,2x_k-1,\ldots,x_n) & x\geq 1/2
+\end{cases}
+\]
+We want to show that $f+g \simeq f+'g$. Indeed, consider the homotopy
+\[
+H(\bar{x},t) =
+\begin{cases}
+  f(2x_1,x_2,\ldots,(1+t)x_k,\ldots,x_n) & x_1 \leq 1/2, x_k \leq 1/(1+t) \\
+  g(2x_1-1,\ldots, (1+t)x_k-t,\ldots,x_n) & x_1 \geq 1/2, x_k \geq
+  t/(1+t)
+\end{cases}
+\]
+So that $H(\bar{x},0) = (f+g)(\bar{x})$. Then we set
+\[
+H(\bar{x},t) =
+\begin{cases}
+  f((2-t)x_1,x_2,\ldots,2x_k,\ldots,x_n) & x_1 \leq 1/(2-t), x_k \leq 1/2 \\
+  g(2x_1-1,\ldots, (1+t)x_k-t,\ldots,x_n) & x_1 \geq (1-t)/2, x_k \geq 1/2
+\end{cases}
+\]
+The continuity of $H$ and $K$ is clear because they are continuous in
+each of their coordinates. Then we observe that by the construction
+$K(\bar{x},0) = H(\bar{x},1)$ and $K(\bar{x}, 1) =
+(f+'g)(\bar{x})$. Hence the composition of $H$ and $K$ is a homotopy
+connecting $f+g$ and $f+'g$ so $f+g \simeq f+'g$.
+
+\exercise{A1}
+
+Let $x_0$ and $x_1$ be points in the same path component of a space
+$X$. Consider the set of paths in $X$ from $x_0$ to $x_1$. Let $[f]$
+be a fixed homotopy class of paths. We can turn $f$ into a loop
+centered at $x_0$ by concatenating with a path $\bar{g}$ which moves
+from $x_1$ to $x_0$. Clearly, each homotopy class of $\bar{g}$
+determines a homotopy class of loops in $\pi_1(X,x_0)$ because loops
+$f\cdot g'$ are not homotopic unless $g \simeq \bar{g}$ by
+definition. Moreover, this map will give all of $\pi_1(X,x_0)$ because
+$X$ is path-connected so the endpoint change homomorphism is an
+isomorphism (just rename $x_1$ to the point you want), so the set of
+loops generated is independent of the endpoint. In addition we see
+that changing the homotopy class of $f$ will not change the set of
+loops because $f\cdot g$ is homotopic to $f'\cdot f$ for some $[f'] =
+[g]$. So this means that these loops are in the same conjugacy class
+in $pi_1(X,x_0)$ (solve for the conjugacy class of $f$). We already
+have a map that is bijective from $[I,X]$ to conjugacy classes in
+$\pi_1(X,x_0)$ (Exercise 6) and so this completes the proof.
+
+\end{document}
