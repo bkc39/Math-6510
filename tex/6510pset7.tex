@@ -1,0 +1,253 @@
+\documentclass{article}
+\usepackage{bkc}
+\usepackage{ccfonts}
+\usepackage{tikz-cd}
+
+\setassn{Math 6510 Problem Set 7}
+
+\usetikzlibrary{decorations.markings,decorations.pathmorphing,matrix,arrows}
+\tikzset{middlearrow/.style={
+        decoration={markings,
+            mark= at position 0.5 with {\arrow{#1}} ,
+        },
+        postaction={decorate}
+    }
+}
+
+\newcommand{\im}{\text{im }}
+
+\begin{document}
+\begin{exercise}{2.2.1}{\parindent}
+  Prove the Brouwer fixed point theorem for maps $f: D^n \to D^n$ by
+  applying degree theory to the map $S^n \to S^n$ that sends both the
+  northern and southern hemispheres of $S^n$ to the southern
+  hemisphere via $f$.
+\end{exercise}
+\begin{solution}{\parindent}
+  Suppose that there were such a map $f: D^n \to D^n$ such that $f(x)
+  \neq x$ for every $x \in D^n$. Then there is a homotopy
+  \[
+  H(x,t) = \frac{f(x)(1-t) + x(t)}{\norm{f(x)(1-t) + x(t)}}
+  \]
+  which is well-defined because $f$ fixes no point. This homotopy in
+  particular defines a retraction $r: D^n \to S^{n-1}$ of the disk
+  onto its boundary sphere. Let $i$ be the inclusion $S^{n-1}\to D^n$
+  so that $r\circ i = \mathbb{1}$. This implies that the induced
+  homomorphism $r_\ast i_\ast = \mathbb{1}$ in the (reduced)
+  homology. However, we know that $\tilde{H}_{n-1}(S^{n-1}) \cong Z$
+  because and that $\tilde{H}_{n-1}(D^n) \cong 0$. This implies an
+  isomorphism $\varphi: 0 \to \Z$ which is clearly impossible. This
+  contradiction establishes that no such $f$ exists.
+\end{solution}
+
+\begin{exercise}{2.2.2}{\parindent}
+  Given a map $f:S^{2n} \to S^{2n}$, show that there is some point $x
+  \in S^{2n}$ with either $f(x) = x$ or $f(x) = -x$. Deduce that every
+  map $\R P^{2n} \to \R P^{2n}$ has a fixed point. Construct maps $\R
+  P^{2n-1} \to \R P^{2n-1}$ without fixed points from linear
+  transformations $\R^{2n} \to \R^{2n}$ without eigenvectors.
+\end{exercise}
+\begin{solution}{\parindent}
+  For the first claim, suppose that $f$ and $-f$ both have no
+  fixed-points. This implies that $\deg(f) = (-1)^{2n+1} = -1$. But
+  $\deg(-f) = (-1)^{2n+1} = -1$ and so $\deg(f) = 1$, a
+  contradiction. Thus, either $f$ or $-f$ has a fixed point and so
+  there is a point $x \in S^{2n}$ with either $f(x) = x$ or $f(x) =
+  -x$.
+
+  Now let $g: \R P^{2n} \to \R P^{2n}$. Then $g$ lifts to a map
+  $\tilde{g}: S^{2n} \to S^{2n}$ and so we can find a point
+  $\tilde{x}$ such that $\tilde{g}(\tilde{x}) = \pm x$. Then passing
+  back down to the quotient via that projection $p$, we see that
+  $p(x)$ must be a fixed point for $g$.
+
+  For the last part of the problem, consider a non-identity
+  automorphism $T \in \text{Aut}(\R^{2n})$. Then $T$ has no fixed
+  points. We then construct a map $f = p \circ T \circ p^{-1}: \R
+  P^{2n-1} \to \R P^{2n-1}$ with no fixed points by lifting to
+  $S^{2n}$, apply $T$ and then composing with the projection map. This
+  has no fixed points because otherwise we would have $(p \circ T
+  \circ p^{-1})(x) = x$ which implies that $T(p^{-1}(x)) =
+  p^{-1}(x)$. This is impossible becuase $T$ has no fixed points.
+\end{solution}
+
+\begin{exercise}{2.2.3}{\parindent}
+  Let $f: S^n \to S^n$ be a map of degree zero. Show that there exist
+  points $x,y \in S^n$ with $f(x) = x$ and $f(y) = -y$. Use this to
+  show that if $F$ is a continuous vector field defined on the unit
+  ball $D^n$ in $\R^n$ such that $F(x) \neq 0$ for all $x$, then there
+  exists a point on $\partial D^n$ where $F$ points radially outward
+  and another point on $\partial D^n$ where $F$ points radially
+  inward.
+\end{exercise}
+\begin{solution}{\parindent}
+  Suppose towards a contradiction that $f(x) \neq x$ for each $x \in
+  S^n$. Then $\deg (f) = (-1)^{n+1}$. Likewise, if $f(y) \neq y$ for
+  each $y \in S^n$, then the line from $y$ to $f(y)$ does not pass
+  through the origin. Given this fact, consider the homotopy
+  \[
+  H: (y,t) \mapsto \frac{(1-t)f(y) + ty}{\norm{(1-t)f(y) + ty}}
+  \]
+  This is well-defined because the denominator is non-zero by
+  assumption. Moreover, we see that $H(y,0) = f(y)$ and $H(y,1) =
+  \mathbb{1}$. So then $\deg(f) = \deg(\mathbb{1}) = 1$, which is
+  non-zero. Therefore, $f$ must have a fixed point. Likewise, $-f$
+  must also have a fixed point. The contradiction establishes the
+  first part.
+
+  Now let $F$ be a non-zero vector field on $D^n$. First, define the
+  map $\alpha: D^n \to S^{n-1}$ given by $\alpha(x) =
+  F(z)/\norm{F(z)}$. Then consider the restriction of $\alpha$ to
+  $\partial D^n$ given by $\alpha\mid_{\partial D^n}: S^{n-1} \to
+  S^{n-1}$. We see that the restriction $\alpha\mid_{\partial D^n}$
+  factors through $D^n$, which is contractible, and therefore must be
+  nullhomotopic. Then $\deg (\alpha\mid_{\partial D^n}) = 0$ and so by
+  the above we have points $x,y \in \partial D^n$ such that
+  $\alpha\mid_{\partial D^n}(x) = x$ and $\alpha\mid_{\partial D^n}(y)
+  = -y$. Then by the definition of $\alpha$ we see that $F(x) =
+  x\norm{F(x)}$ and $F(y) = -y\norm{F(y)}$, which are vectors pointing
+  radially outward and inward, respectively.
+\end{solution}
+
+\begin{exercise}{2.2.4}{\parindent}
+  Construct a surjective map $S^n \to S^n$ of degree zero, for each $n
+  \geq 1$.
+\end{exercise}
+\begin{solution}{\parindent}
+  First consider the canonical injection $i:S^n \to D^n$ by sending
+  $S^n$ to the boundary of $D^n$. Because $D^n$ is contractible, this
+  map is nullhomotopic. We then observe that $S^n$ is the quotient
+  $D^n/S^{n-1}$ and if we let $p$ be the quotient map, we see that
+  $p\circ f$ is surjective, and homotopic to the constant map, and
+  therefore $\deg(p\circ f) = 0$, as desired.
+\end{solution}
+
+\begin{exercise}{2.2.6}{\parindent}
+  Show that every map $S^n \to S^n$ can be homotoped to have a fixed
+  point if $n > 0$.
+\end{exercise}
+\begin{solution}{\parindent}
+  Consider a map $f: S^n \to S^n$ and a point $x \in f(S^n)$. Let $y
+  \in f^{-1}(x)$ let $T$ be the rotation of the sphere such that $T(x)
+  = y$. Because $S^n$ is path-connected define a homotopy $H(x,t)$
+  connecting the identity map $\mathbb{1}$ to $T$ by moving each point
+  along a path between $x_0$ and $T(x_0)$. Then $H(x,0) = x$ and
+  $H(x,1) = T(x)$. We then compose $f$ with such a homotopy and
+  observe that
+  \begin{align*}
+    (f\circ H)(x,0) &= f(x) \\
+    (f\circ H)(x,1) &= (f\circ T)(x)
+  \end{align*}
+  But then we see that $(f\circ T)(x) = f(y) = x$. So $f$ can be
+  homotoped to a map with a fixed point.
+\end{solution}
+
+\begin{exercise}{2.2.7}{\parindent}
+  For an invertible linear transformation $f: \R^n \to \R^n$ show that
+  the induced map on $H_n(\R^n, \R^n - \{0\}) \approx
+  \tilde{H}_{n-1}(\R^n - \{0\} \approx \Z$ us $\mathbb{1}$ or
+  $-\mathbb{1}$ according to whether the determinant of $f$ is
+  positive or negative.
+\end{exercise}
+\begin{solution}{\parindent}
+  % Let $f:\R^n \to \R^n$ be an invertible linear transformation. Then
+  % $f$ has a matrix representation $A_f: \R^n \to \R^n-\{0\}$. Observe
+  % that because $\R^n - \{0\}$ deformation retracts onto $S^{n-1}$ we
+  % have a map $r: \R^n - \{0\} \to S^{n-1}$ and let $i: S^{n-1} \to
+  % \R^n-\{0\}$ be the canonical inclusion. Then because $ri \cong
+  % \mathbb{1}$ and $ir \cong 1$ we see that the induced maps $r_\ast
+  % i_\ast = \mathbb{1}$ and $i_\ast r_\ast = \mathbb{1}$. This leads to
+  % the following diagram of homology groups
+  % \begin{center}
+  %   \begin{tikzcd}
+  %     & & \tilde{H}_{n-1}(S^{n-1}) \arrow{d}{i_\ast} & \\
+  %     H_n(\R^n) \cong 0 \arrow{r} & H_n(\R^n, \R^n-\{0\})
+  %     \arrow{r}{\partial} \arrow{d}{A_\ast} &
+  %     \tilde{H}_{n-1}(\R^n-\{0\}) \arrow{r} \arrow{d}{A_\ast}&
+  %     \tilde{H}_{n-1}(\R^n) \cong 0 \\
+  %     H_n(\R^n) \cong 0 \arrow{r} & H_n(\R^n, \R^n-\{0\})
+  %     \arrow{r}{\partial} & \tilde{H}_{n-1}(\R^n-\{0\}) \arrow{r}
+  %     \arrow{d}{r_\ast} &
+  %     \tilde{H}_{n-1}(\R^n) \cong 0 \\
+  %     & & \tilde{H}_{n-1}(S^{n-1})
+  %   \end{tikzcd}
+  % \end{center}
+  % By the above and the fact that the long exact sequence of a pair is
+  % exact, we have that the diagram commutes and has exact rows. That
+  % is, the connecting homomorphisms are isomorphisms. If we topologize
+  % $GL(\R^n)$ as a subspace of $\R^{n^2}$ we see that it is locally
+  % path-connected and locally compact so the path-components and
+  % components coincide. Thus, the map $A \mapsto \text{sign}(\det A)$
+  % is continuous from $GL(\R^n) \to \{\pm 1\}$. Then there is a path in
+  % $GL(\R^n)$ from $\alpha: A \to c\text{ sign}(\det A)A$ for any scalar
+  % $c$. Then there is a homotopy $H(A,t) = \alpha(t)A$.
+
+  % {\footnotesize Note: I think there is a much simpler proof of this
+  %   by looking at the elementary matrices that generate $GL(\R^n)$, but
+  %   the proof didn't use any of the techniques from this section.}
+
+  Following the hint, we begin by noting that we can perform Gaussian
+  elimination via a sequence of multiplcation by elementary matrices
+  on the matrix representation for the map $f$. This will define a
+  homotopy from $A_f$, the matrix corresponding to $f$, to a diagonal
+  matrix $D$ with $\pm 1$ on the diagonals. Because $\det$ is a
+  homomorphism, multiplications by suitable elementary doesn't change
+  the sign of the determinant, and so $\det A = \det D$. Now we note
+  that $S^{n-1}$ is a deformation retract of $\R^n - \{0\}$ and so
+  because the degree of any map $S^{n-1} \to S^{n-1}$ that is a
+  negation of one of the coordinates has degree $-1$ and so the same
+  must hold in $\R^{n}-\{0\}$. By the long exact sequence of the pair
+  we see that the same must hold in $H_n(\R^n,\R^{n}-\{0\}$. So
+  $D_\ast$ will have degree $(-1)^\ell$ where $\ell$ is the number of
+  $-1$'s on the diagonal. Becuase $A \sim D$ $A_\ast$ will have the
+  same degree, which is precisely $\pm 1$ depending on the determinant
+  of $D$.
+\end{solution}
+
+\begin{exercise}{2.2.8}{\parindent}
+  A polynomial $f(z)$ with complex coefficients, viewed as a map $\C
+  \to \C$, can always be extended to a continuous map of one-point
+  compactifications $\hat{f}: S^2 \to S^2$. Show that the degree of
+  $\hat{f}$ equals the degree of $f$ as a polynomial. Show also that
+  the local degree of $\hat{f}$ at a root of $f$ is the multiplicity
+  of the root.
+\end{exercise}
+\begin{solution}{\parindent}
+  Let $f: \C \to \C$ be a polynomial. By the fundamental theorem of
+  algebra $f$ admits a factorization
+  \[
+  f(z) = \prod_{j=1}^n (z-z_j)^{\alpha_j}
+  \]
+  Now note that $p:S^2 \to \C$ is a covering space and so $f$ lifts to
+  a map $\tilde{f}$. Now for each root $z_j$ we can find a
+  neighborhood $U_j$ containing $p^{-1}(z_j)$ and we can choose the
+  $U_j$ to be disjoint in $S^2$. Now let $U_j$ is mapped to a
+  neighborhood of $0$, say $V_j$. This induces a map on the relative
+  homology groups
+  \[
+  \tilde{f}_\ast: H_2(U_j, U_j - \{\tilde{z}_j\}) \to H_2(V_j, V_j - \{0\})
+  \]
+  By the commutative diagram at the top of page 136, we see that each
+  of the groups can be indentified with $H_2(S^2) \cong \Z$ so that
+  $\tilde{f}_\ast$ is multiplication by an integer which is $\deg
+  \tilde{f}\mid z_j$. Now because the neighborhoods $U_j$ are
+  disjoint, we see that $\tilde{z_j}$ is the only root of $\tilde{f}$
+  in $U_j$. So if we restrict $f$ to $U_j$ we get a map looking like
+  \[
+  f\mid_{U_j}(z) = (z-z_j)^{\alpha_j\log(z-z_j)}\prod_{i\neq
+    j}(z-z_i)^{\alpha_i}
+  \]
+  This map is clearly $\alpha_j$-to-one onto $V_j$ because the
+  exponential wraps around the circle at least $\alpha_j$ times in a
+  sufficiently small deleted-neighborhood of $\tilde{z}_j$. Thus, a
+  generator for $H_2(U_j,U_j-\{\tilde{z}_j\})$ maps to $\alpha_j$
+  times a generator for $H_2(V_j,V_j-\{0\})$. This implies that the
+  local degree of $\tilde{f}$ at $z_j$ is $\alpha_j$. By Proposition
+  2.30
+  \[
+  \deg(f) = \sum_j \deg(f)\mid z_j = \sum_j \alpha_j
+  \]
+  Moreover, by the fundamental theorem of algebra we see that the
+  degree of $f$ (as a polynomial) is $\sum_j \alpha_j$ as desired.
+\end{solution}
+\end{document}

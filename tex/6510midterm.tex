@@ -1,0 +1,361 @@
+\documentclass{article}
+\usepackage{bkc}
+\usepackage{ccfonts}
+\setassn{Math 6510 Midterm}
+
+\begin{document}
+
+\begin{problem}{1}{\parindent}
+  Let T be the torus $S^1 \times S^1$ and let $T'$ be $T$ with a small
+  open disk removed. Let $X$ be obtained from $T$ by attaching two
+  copies of $T'$, identifying their boundary circles with the
+  longitude and meridian circles $S^1 \times \{x_0\}$ and $\{x_0\}
+  \times S^1$ in $T$. Find a presentation for $\pi_1(X)$.
+\end{problem}
+
+\begin{solution}{\parindent}
+  We will compute the fundamental group of $X$ by applying van
+  Kampen's theorem. We first begin by verifying the hypotheses of the
+  theorem. Consider an open neighborhood of $X$, say $U_X$ embedded in
+  $\R^3$ chosen so that it deformation retracts onto $X$. Because
+  deformation retraction is a homotopy equivalence, $\pi_1(U_X) \cong
+  \pi_1(X)$. If we let $X_1$ be the embedding of $T$ in $U_X$ and
+  $X_2,X_3$ be the respective embeddings of $T'$, then the union of
+  open neighborhoods about each of them will cover $X$. Each of the
+  $X_i$ is path-connected and the intersection of $X_i\cap X_j \simeq
+  S^1$ for $i\neq j$, which is also path-connected. Because the
+  intersection $X_1 \cap X_2 \cap X_3 = \{x_0\}$, where $x_0$ is the
+  intersection of the boundary circles, the three way intersection is
+  path connected as well. So we have a map
+  \[
+  \Phi: \pi_1(X_1) \ast \pi_1(X_2) \ast \pi_1(X_3) \lra \pi_1(X)
+  \]
+  that is surjective. Moreover, we see that $\pi_1(X) \cong \ast_i
+  X_i/\ker(\Phi)$. So we are left to compute $\pi_(X_i)$ as well as
+  impose relations for each element of $\ker(\Phi)$ and we will be
+  done.
+
+  The fundamental group of $X_1 \simeq S^1 \times S^1$ is known, $\Z
+  \times \Z$. To compute the fundamental group $\pi_1(T')$ we again
+  consider the square with a small disk removed. If we look at this as
+  a CW-complex we have one vertex and 5 edges as in the attached
+  diagram (see attached).
+
+  We can then read off the relation on the fundamental group from the
+  above by noting that it deformation retracts onto the boundary (via
+  a straght line homotopy and read off the relation $\ell[e_1,e_2]$,
+  where $[e_1,e_2] = e_1e_2e_1^{-1}e_2^{-1}$ is the commutator of
+  $e_1$ and $e_2$. So we see that 
+  \[
+  \pi_1(T') \cong \lbrace e_1,e_2,e_3\mid e_3[e_1,e_2]\rbrace
+  \]
+  Now we note that the space $X$ could be indentified as in the
+  attached picture with the identifications $\ell_1 \simeq a$ and $\ell_2
+  \simeq b$. Looking at the space $X_1$, we get the relation $[a,b] =
+  1$. After the identifications and the observation that $\ell_n =
+  [g_n,g_{n+1}]$ (by the relation in $\pi_1(T')$ this translates to
+  the relations
+  \[
+  [a,b] = aba^{-1}b^{-1} =
+  [g_1,g_2][g_3,g_4][g_1,g_2]^{-1}[g_3,g_4]^{-1} = 1
+  \]
+  Note, that these commutators are the elements in $\ker(\Phi)$
+  because they are all the elements of the form
+  $i_{nm}(\omega)i_{mn}^{-1}(\omega)$, which is precisely
+  $\ker(\Phi)$. Thus, we have the computation
+  \[
+  \pi_1(X) \cong \lbrace g_1,g_2,g_3,g_4 \mid
+  [g_1,g_2][g_3,g_4][g_1,g_2]^{-1}[g_3,g_4]^{-1} \rbrace
+  \]
+
+\end{solution}
+
+\begin{problem}{2}{\parindent}
+  Consider the quotient space of a cube $I^3$ obtained by identifying
+  each square face with the opposite square face via the right-handed
+  screw motion consisting of a translation by one unit in the
+  direction perpindicular to the face combined with a one-quarter
+  twist of the face about its center point. Show this quotient space
+  $X$ is a CW complex with two 0-cells, four 1-cells, three 2-cells,
+  and one 3-cell. Using this structure, show that $\pi_1(X)$ is th
+  quaternion group $\{\pm 1, \pm i, \pm j, \pm k\}$, of order eight.
+\end{problem}
+
+\begin{solution}{\parindent}
+  Consider the cube identified as in the attached diagram: We then do
+  the identification via the ``screw motion''. and get the quotient
+  space $X$, (in diagram).
+
+  To see the CW-complex structure we see there are two 1-cells, one
+  for vertices $v_0,v_2,v_5,v_7$ another for the vertices
+  $v_1,v_3,v_4,v_6$. The 2-cells would correspond to the opposite
+  faces of the original cube (th three classes are shown in the
+  attached diagram.. Lastly, the 3-cell would attach along each face
+  and ``fill'' the space.
+
+  Now we will compute the fundamental group, $\pi_1(X)$. Let us look
+  at the 2-cells, these give the relations $abcd, c^{-1}d^{-1}ba,
+  adb^{-1}c^{-1}$ (all of these products are the identity, this will
+  be used in the computations). In addition, we showed that attaching
+  a $k$-cell for $k > 2$ does not affect the computation of
+  $\pi_1(X)$, the the one 3-cell in the construction is irrelevant.
+
+  We need to find the isomorphism between $\pi_1(X)$ and $Q_8$. We
+  have a familiar presentation for $Q_8$ (c.f. \textit{Abstract
+    Algebra} by Dummit and Foote) given by
+  \[
+  Q_8 = \lbrace x,y | x^4, y^{-2}x^2, xyxy^{-1}\rbrace
+  \]
+  We need to find how the relations above for $\pi_1$ are equivalent
+  to these. We begin by finding the elements of order two. Note that
+  \[
+  abab = adcb = adad
+  \]
+  For the element of order 4, we compute
+  \[
+  (ab)^4 = (cd)^{-1}(ab)^2(cd)^{-1} = (d^{-1}c^{-1})adcb(d^{-1}c^{-1})
+  = d^{-1}bac^{-1} = d^{-1}dcc^{-1}
+  \]
+  Thus, $(ab)$ has order 4 in $\pi_1(X)$. For the last relation, we
+  will show the equivalent condition $(ad)(ab)(ad)^{-1} =
+  (ab)^{-1}$. Indeed, observe that
+  \[
+  (ad)(ab)(ad)^{-1} = (ad)abb^{-1}c^{-1} = adac^{-1} = cbac^{-1} = cd = (ab)^{-1}
+  \]
+  By the relations, we also see that $(cd), (cb)$ are generated by
+  $(ab),(ad)$ and so $(ab),(ad)$ are the desired generators for the
+  presentation of $Q_8$. So the map $(ab) \mapsto x$, $(ad) \mapsto y$
+  is the desired isomorphism.
+\end{solution}
+
+\begin{problem}{3}{0cm}
+  \vspace*{-\bigskipamount}
+  \begin{enumerate}
+  \item Show that $f: X \to Y$ is a homotopy equivalence if there
+    exist maps $g,h: Y \to X$ such that both compositions $gf$ and
+    $fh$ are homotopic to the identity.
+  \item Let $X$ and $Y$ be path-connected and locally path-connected,
+    and let $\tilde{X} \to X$ and $\tilde{Y} \to Y$ be
+    simply-connected covering spaces. Show that if $X \simeq Y$ then
+    $\tilde{X} \simeq \tilde{Y}$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}{0cm}
+  \begin{enumerate}
+  \item Suppose that $f: X \to Y$ has both left and right inverses
+    $g,h: Y \to X$, respectively. Because $fh \simeq \mathbb{1}_Y$ and
+    $gf \simeq \mathbb{1}_X$, we see $g \simeq gfh$ and $h \simeq
+    gfh$. Applying $f$ to these relations we get that $fh \simeq
+    \mathbb 1_Y \simeq fg$. Thus, $g$ is in fact a right-inverse to $f$
+    so $f$ is a homotopy equivalence.
+  \item Let $p_1: \tilde{X} \to X$ and $p_2: \tilde{Y} \to Y$ be the
+    covering maps. We will construct a map $\tilde{f}: \tilde{X} \to
+    \tilde{Y}$ that is a homotopy equivalence by precomposing the
+    lifts of the homotopy equivalence $f,g$ with their respective
+    covering maps. More precisely, if we have a point $\tilde{\alpha}
+    \in \tilde{X}$, there is a path from $\tilde{\alpha}$ to the
+    desired basepoint in $\tilde{X}$, say $\tilde{x}$. We know that
+    such a path must exist because of Proposition 1.33. If we let
+    $\tilde{ell}$ be the path, then we can apply $p_1$ to
+    $\tilde{ell}$ and project down to a usual path in $X$ from the
+    basepoint $x$ to $p{\tilde{\alpha}} = \alpha$, $\ell$. We then
+    apply $f$ to map into $y$ to get a path in $Y$ that lifts
+    $f\ell$. We define our desired map, $\tilde{f}$ as moving
+    $\tilde{alpha}$ to the endpoint of this lifted path. Note that
+    this construction says that $p_2(\tilde{f\ell}) \simeq f\ell$ and
+    so $p_2 \tilde{f} \simeq fp_1$. We define the proposed homotopy
+    inverse for $\tilde{h}$, call it $\tilde{g}$ analogously. Namely,
+    in such a way that $p_1(\tilde{g}) \simeq gp_2$.
+
+    We need to show that this is indeed a homotopy equivalence. If we
+    consider the construction we have shown that
+    $p_1\tilde{g}\tilde{f} \simeq gp_2\tilde{f} \simeq p_1$ and
+    likewise $p_2\tilde{f}\tilde{g} \simeq fp_1\tilde{g} \simeq
+    p_2$. These equivalences follow from the homotopy lifting property
+    because we can simply restrict the homotopy of $fg$ and $gf$ to
+    the respective identities, and by the uniqueness this lift must be
+    $\tilde{f}\tilde{g}$ and $\tilde{g}\tilde{f}$, respectively.
+    Thus, this is in fact a homotopy equivalence and we are done.
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{4}{0cm}
+  \vspace*{-\bigskipamount}
+  \begin{enumerate}
+  \item Using covering spaces, enumerate all the different subgroups
+    of $\Z \ast \Z$ of index 3 and determine which of these are normal
+    subgroups. Your answer should include some justification why this
+    list is complete.
+  \item For $p$ prime, find all the index $p$ normal subgroups of $\Z
+    \ast \Z$ and the corresponding covering spaces of $S^1 \vee S^1$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}{0cm}
+  \begin{enumerate}
+  \item Let $X = S^1 \vee S^1$ so $\pi_1(X) \cong \Z \ast \Z$. We
+    then apply Proposition 1.36 from the book to see that every
+    subgroup of $G \leq \Z \ast \Z$ has a corresponding covering space
+    $p: \tilde{X}_G \to X$. Because the subgroups we are looking for
+    have index 3, we apply Theorem 1.38 to see that the corresponding
+    covering spaces must be the connected 3-sheeted covering spaces of
+    $S^1 \vee S^1$. 
+
+    We know that each covering space must be regular of degree 4 with
+    in-degree 2 and out-degree 2, because the covering space must be
+    locally homeomorphic to the base space. Moreover, because each
+    edge must be the lift of a generating loop in the base space, we
+    see that there must be one ``in'' edge and one ``out'' edge for
+    each generator in the base space. In particular, this means that
+    a self-loop in the covering space forces the other edges to go to
+    a different vertex because otherwise the graph would be
+    disconnected. As a result, we can characterize the graph by the
+    number of vertices with self-loops. We consider each case:
+    \begin{enumerate}
+    \item If there are no self loops, then there is only one graph
+      possible (up to isomorphism) because of the relations on the
+      edges. We get the graph attached.
+
+    \item If there is one self loop then we can see that there is only
+      one possible graph satsifying the restriction on the edges.
+    \item If there are two loops we also have only one possibility.
+    \item Finally, in the case that there are three self loops, there
+      can only be one possible choice.
+    \end{enumerate}
+    We can see that only two of the covering spaces are regular: the
+    one with no self-loops and the one with three self-loops. The
+    intuition is clear: the other two do not have maximal
+    symmetry. Phrasing this in the language of deck transformations,
+    we see that there must be an automorphism of the covering space
+    that takes a given vertex, say $v_0$, to another vertex,
+    $v_1$. This is clearly impossible, because any graph automorphism
+    would preserve self loops, so there is no autmorphism that could
+    take a vertex with a self-loop to one without one. So all of the
+    vertices must have the same number of self loops, either one or
+    zero. 
+  \item The critical fact is the subgroups we are looking for are
+    normal. By the same reasoning as the previous part, we are looking
+    for connected $p$-sheeted covering spaces of $S^1 \vee S^1$. By
+    proposition 1.39 we see that normal covering spaces are in
+    bijective correspondence with normal subroups. Moreover, we knkow
+    that $G \cong \pi_1(X)/H$, where $H$ is the given normal
+    subgroup. Because $G \cong \Z \ast \Z$ this implies that there is
+    a surjective homomorphism $\varphi: \Z \ast \Z \to
+    \Z/p\Z$. Because homomorphisms are determined by their values on
+    the generators, we can specify all possible homomorphisms by
+    considering where it would send the generating loops of the base
+    space.
+
+    Because $\varphi$ is surjective, we see that it cannot send both
+    of the generating loops to 0. There are then two cases to consider
+    \begin{enumerate}
+    \item If $\varphi$ sends one generator to zero then it must send
+      the other generator a non-zero element, which has order
+      $p$. This leads to a covering space that has one $p$-cycle and
+      every vertex has a self-loop, corresponding to the generator
+      mapped to zero.
+    \item Otherwise $\varphi$ sends both generators to elements of
+      order $p$ in $\Z/p\Z$. This leads to a graph that has two $p$
+      cycles, one for each generator.
+    \end{enumerate}
+    This is all of the covering spaces, and therefore subgroups, up to
+    isomorphism. To count them the first case gives us one possible
+    covering space up to isomorphism: the graph with $p$
+    self-loops. The second case only contributes one addition covering
+    space (up to isomorphism) because we can simply relabel the
+    vertices to have the two $p$-cycles map to one another (they are
+    conjugates in $\Z \ast \Z$).
+  \end{enumerate}
+\end{solution}
+
+\begin{problem}{5}{\parindent}
+  \medskip
+  Let $T: \R^2 \to \R^2$ be the linear transformation $T(x,y) =
+  (2x,y/2)$. This generates an action of $\Z$ on $X = \R^2 - \{0\}$.
+  \begin{enumerate}
+  \item Show this action of $\Z$ on $X$ is a covering space action.
+  \item Show that $X/\Z$ is not a Hausdorff space and describe how it
+    is the union of four subspaces homeomorphic to $S^1 \times \R$,
+    two coming from the complementary components of the $x$-axis and
+    two coming from the complimentary components of the $y$-axis.
+  \item Show that $\pi_1(X/\Z) \cong \Z \times \Z$ and construct a map
+    $S^1 \times S^1 \to X/\Z$ that induces an isomorphism on $\pi_1$
+    and all higher homotopy groups $\pi_n$.
+  \end{enumerate}
+\end{problem}
+
+\begin{solution}{0cm}
+  Let the action of $\Z$ on $X$ be given by $n \cdot v = T^{n}(v)$.
+  \begin{enumerate}
+  \item We need to find a neighborhood about a point $(x,y)$ such that
+    $T^n(U) \cap T^m(U) = \emptyset$ when $m \neq n$. Consider first
+    positive values of $m$ and $n$ and suppose that $m > n$. Then the
+    radius $r$ must satisfy the relation
+    \[
+    |2^m(x -r) - 2^n(x+r)| > 0
+    \]
+    Solving for $r$ we see that $r < (2^m-2^n)x/(2^m+2^n)$. Letting
+    $m,n \to \infty$ sends $r$ to zero, so the largest difference
+    possible is when $n=1,m=2$ and we get $r < x/3$. For negative
+    values of $n,m$ we apply the same inequality in the $y$-coordinate
+    to see that $r < y/3$. If $n$ and $m$ have different signs then
+    the sets $T^m(U)$ and $T^n(U)$ are clearly disjoint by applying
+    the inequality with $-n$ replaced for $n$. Thus, a ball of radius
+    $\min\{x/3, y/3\}$ is the desired neighborhood.
+  \item First we will show that the orbit space $X/\Z$ is not
+    Hausdorff. Choose two points $(x_0,y_0), (x_1,y_1)$ in $X$ and two
+    open neighborhoods $U_0, U_1$ about each point respectively. we
+    must show that $U_1 \cap U_2 \neq \emptyset$ in the orbit
+    space. Because $U_0, U_1$ are bounded we see that eventually
+    $T^n(U_i)$ will intersect the $x$-axis for large enough values of
+    $N$ (because $y/2^n \to 0$ for any $y$ as $n \to \infty$. The
+    intersections will be intervals on the axis, both of which are
+    bounded. Suppose that the first interval is $I_0 = \alpha_0 \pm
+    \epsilon_0$ and the second is $I_1=\alpha_1 \pm \epsilon_1$. We
+    need to find a point that is in the orbit of both of these
+    intervals. Suppose that $I_0$ is bounded by $2^{N_0}$ and $I_1$ is
+    bounded by $2^{N_1}$ and that $N_0 \leq N_1$. Then a point in the
+    intersection will exist if we can satisfy
+    \[
+    2^{-N_0}(\alpha_0 + \epsilon_0) \geq 2^{-N_1}(\alpha_1 - \epsilon_1)
+    \]
+    Or equivalently
+    \[
+    \frac{\alpha_0 + \epsilon_0}{\alpha_1 - \epsilon_1} \geq 2^{N_0 - N_1}
+    \]
+    This is clearly possible for $m$ sufficiently large. Thus, any two
+    neighborhoods have non-empty intersection in the quotient
+    space. So the space $X/\Z$ is not Hausdorff.
+
+    Now let's see how $X/\Z$ is homeomorphic to the union of four
+    cylinders. Consider the lines $y = \pm x$ in the plane. The orbit
+    space of point in $X$ lies on a unique hyperbola and we can index
+    the hyperbola's by the coordinate that the intersect $y=x$. In a
+    similar manner to the construction from the projective plane (the
+    space of lines in the plane), we will construct the space
+    $X/\Z$. Note that the analog of the stereographic projection is
+    given by the $x$-coordinate of the intersection point with $y=x$
+    and the hyperbolic angle $u$. There are only 4 points at
+    infinity in this construction, two for each axis, and as a result,
+    each hyperbola in $X$ wraps around to a loops in $X/\Z$. Thus, we
+    see a cylinder for each complementary piece of the axis. if we let
+    $x_v$ be the $x$-coordinate of the point where the hyperbola
+    containing $v$ in $\R^2$ intersects $y = \pm x$ then there is a
+    natural mapping $v \mapsto (x_v, u)$ in $X/\Z$.
+  \item Now we need to show that $\pi_1(X/\Z) \cong \Z \times \Z$. We
+    will do this via a map $\varphi: S^1 \times S^1 \to X/\Z$ that
+    induces an isomorphism. Let the map be given by $(\theta, \psi)
+    \mapsto (\cosh\theta, \sinh\psi)$. The induced map will map the
+    generating circles in the torus onto the image of the deleted disk
+    in $X$ and then the second angle will measure which point on the
+    circle corresponding to the image of a hyperbola under the
+    quotient map. In particular, this map has trivial kernel and
+    therefore this induces an isomorphism on $pi_1$. To get the
+    isomorphism on the higher homotopy groups because it is a covering
+    space projection and so we can apply Proposition 4.1 to get that
+    it induces an isomorphism on the higher homotopy groups $\pi_n$ as
+    well.
+  \end{enumerate}
+\end{solution}
+\end{document}
